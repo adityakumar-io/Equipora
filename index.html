@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equipora - Equipment Rental Manager</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Sidebar navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">Equip<span>ora</span></div>
+
+      <nav>
+        <button class="nav-link" data-page="dashboard" data-roles="admin owner customer">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-link" data-page="equipment" data-roles="admin owner customer">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></svg>
+          Equipment
+        </button>
+        <button class="nav-link" data-page="bookings" data-roles="admin owner customer">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 5h18v16H3zM3 10h18M8 3v4M16 3v4"/></svg>
+          <span id="bookingsLabel">Rentals</span>
+        </button>
+        <button class="nav-link" data-page="users" data-roles="admin">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>
+          Users
+        </button>
+        <button class="nav-link" data-page="reports" data-roles="admin owner">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 21V10M12 21V4M19 21v-8"/></svg>
+          Reports
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="user-name" id="userName"></p>
+        <p class="user-role" id="userRole"></p>
+        <button class="btn small full" id="logoutBtn">Log out</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </header>
+
+      <main class="content">
+
+        <!-- Dashboard -->
+        <section class="page" id="dashboard">
+          <section class="welcome-hero">
+            <div class="hero-copy">
+              <span class="eyebrow">EQUIPMENT, WHEN YOU NEED IT</span>
+              <h2>Build your next big idea with the right tools.</h2>
+              <p>Find dependable equipment from trusted owners and keep every rental moving in one simple workspace.</p>
+              <button class="btn primary hero-btn" id="browseEquipmentBtn">Browse equipment <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="hero-glow"></div>
+              <span class="hero-shape shape-one"></span>
+              <span class="hero-shape shape-two"></span>
+              <span class="hero-line"></span>
+              <span class="hero-badge">01 <small>RENT SMART</small></span>
+            </div>
+          </section>
+          <div class="cards" id="statCards"></div>
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">KEEP AN EYE ON YOUR WORK</span>
+              <h2>Recent rentals</h2>
+            </div>
+            <button class="text-btn" id="viewRentalsBtn">View all rentals <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Equipment</th><th>Customer</th><th>Dates</th><th>Status</th></tr>
+              </thead>
+              <tbody id="recentBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Equipment list -->
+        <section class="page hidden" id="equipment">
+          <div class="toolbar">
+            <input type="search" id="searchInput" placeholder="Search equipment by name">
+            <select id="categoryFilter"></select>
+            <select id="availabilityFilter">
+              <option value="">All availability</option>
+              <option value="available">Available</option>
+              <option value="unavailable">Unavailable</option>
+            </select>
+            <select id="sortPrice">
+              <option value="">Sort by price</option>
+              <option value="low">Low to high</option>
+              <option value="high">High to low</option>
+            </select>
+            <button class="btn primary" id="addEquipmentBtn">Add equipment</button>
+          </div>
+          <div class="equipment-grid" id="equipmentGrid"></div>
+          <p class="empty hidden" id="noResults">No equipment matches your search.</p>
+        </section>
+
+        <!-- Rentals / bookings -->
+        <section class="page hidden" id="bookings">
+          <div class="toolbar">
+            <select id="statusFilter">
+              <option value="">All statuses</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+              <option>Active</option>
+              <option>Completed</option>
+              <option>Cancelled</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Equipment</th><th>Customer</th><th>Dates</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="bookingsBody"></tbody>
+            </table>
+          </div>
+          <p class="empty hidden" id="noBookings">No rentals found.</p>
+        </section>
+
+        <!-- Users (admin only) -->
+        <section class="page hidden" id="users">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Reports -->
+        <section class="page hidden" id="reports">
+          <div class="cards" id="reportCards"></div>
+          <h2>Most rented equipment</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Equipment</th><th>Times rented</th></tr>
+              </thead>
+              <tbody id="mostRentedBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add / edit equipment form -->
+  <dialog id="equipmentDialog">
+    <form id="equipmentForm" novalidate>
+      <h2 id="equipmentFormTitle">Add equipment</h2>
+      <input type="hidden" id="eqId">
+
+      <label>Equipment name
+        <input type="text" id="eqName">
+      </label>
+      <label>Category
+        <select id="eqCategory"></select>
+      </label>
+      <label>Description
+        <textarea id="eqDescription" rows="3"></textarea>
+      </label>
+      <div class="form-row">
+        <label>Price per day
+          <input type="number" id="eqPrice" min="1">
+        </label>
+        <label>Quantity
+          <input type="number" id="eqQuantity" min="0">
+        </label>
+      </div>
+      <label>Availability
+        <select id="eqAvailable">
+          <option value="yes">Available</option>
+          <option value="no">Unavailable</option>
+        </select>
+      </label>
+      <label>Image (optional, under 500 KB)
+        <input type="file" id="eqImage" accept="image/*">
+      </label>
+
+      <p class="form-error" id="equipmentError"></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button type="submit" class="btn primary">Save equipment</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Equipment details -->
+  <dialog id="detailsDialog">
+    <div id="detailsContent"></div>
+    <div class="dialog-actions">
+      <button type="button" class="btn" data-close>Close</button>
+    </div>
+  </dialog>
+
+  <!-- Rental request form -->
+  <dialog id="rentDialog">
+    <form id="rentForm" novalidate>
+      <h2>Rental request</h2>
+      <p class="note" id="rentEquipmentName"></p>
+      <input type="hidden" id="rentEquipmentId">
+
+      <label>Start date
+        <input type="date" id="startDate">
+      </label>
+      <label>End date
+        <input type="date" id="endDate">
+      </label>
+      <p class="note" id="rentTotal"></p>
+
+      <p class="form-error" id="rentError"></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn" data-close>Cancel</button>
+        <button type="submit" class="btn primary">Send request</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/equipment.js"></script>
+  <script src="js/bookings.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

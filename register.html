@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account - Equipora</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-box">
+    <h1 class="auth-brand">Equip<span>ora</span></h1>
+    <p class="auth-subtitle">Create an account to rent or list equipment.</p>
+
+    <form id="registerForm" novalidate>
+      <label>Full name
+        <input type="text" id="name" autocomplete="name">
+      </label>
+      <label>Email
+        <input type="email" id="email" autocomplete="email">
+      </label>
+      <label>I want to
+        <select id="role">
+          <option value="customer">Rent equipment (Customer)</option>
+          <option value="owner">List my equipment (Owner)</option>
+        </select>
+      </label>
+      <label>Password
+        <input type="password" id="password" autocomplete="new-password">
+      </label>
+      <label>Confirm password
+        <input type="password" id="confirmPassword" autocomplete="new-password">
+      </label>
+      <p class="form-error" id="formError"></p>
+      <button type="submit" class="btn primary full">Create account</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
