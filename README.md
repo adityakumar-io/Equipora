@@ -2,4 +2,4 @@
 
 ### Team members and Roles:
 
-- **Aditya KUmar (`adityakumar-io)**: JavaScript Functionality
+- **Aditya Kumar (`adityakumar-io)**: JavaScript Functionality
