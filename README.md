@@ -4,4 +4,4 @@
 
 - **Aditya Kumar (`adityakumar-io`)**: JavaScript Functionality
 - **Ashok Reddy (`ashokreddy9281-hue`)**: HTML Structure & Pages
-
+- **Nandi krishna Teja (`nandikrishnateja-sketch`)**: CSS Styling & Design
